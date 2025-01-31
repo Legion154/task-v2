@@ -12,6 +12,43 @@ body {
   overflow: hidden;
 }
 
+:root {
+  --primary: #f4f4f4;
+  --secondary: #181d19;
+  --input: #fff;
+  --hovered: rgb(17 24 39 / 0.1);
+  --selected: rgba(16, 22, 36, 0.1);
+}
+
+.dark {
+  --primary: #181d19;
+  --secondary: #f4f4f4;
+  --input: #353535;
+  --hovered: #4b5563;
+  --selected: #5e6a7b;
+}
+
+.Toastify__toast {
+  font-size: 14px;
+}
+
 .Toastify__progress-bar {
   background: #2563eb;
+}
+
+.Toastify__close-button {
+  color: var(--secondary);
+}
+
+.tasks {
+  animation: animateTask 0.3s ease;
+}
+
+@keyframes animateTask {
+  0% {
+    padding: 0 20px 0 20px;
+  }
+  100% {
+    padding: auto;
+  }
 }
