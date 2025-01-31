@@ -222,6 +222,7 @@ const App = () => {
               <div className="relative inline-block w-8 h-4 focus:outline-none cursor-pointer rounded-full">
                 <input
                   type="checkbox"
+                  id="modeMobile"
                   defaultChecked={dark}
                   onChange={mode}
                   className="peer appearance-none w-8 h-4 absolute rounded-full cursor-pointer transition-colors duration-300 bg-gray-300 peer-checked:border-gray-900 peer-checked:before:bg-gray-900 checked:bg-[#4F5665]"
