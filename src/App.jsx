@@ -1,13 +1,15 @@
+import { toast, ToastContainer } from "react-toastify";
 import React, { useState, useEffect } from "react";
+import Loading from "./components/Loading";
 import translations from "../lang.json";
 import uz from "./assets/uz.png";
 import ru from "./assets/ru.png";
 import en from "./assets/en.png";
-import { toast, ToastContainer } from "react-toastify";
 
 const App = () => {
   const defaultDateInp = new Date().toISOString().split("T")[0];
 
+  const [loadingScreen, setLoadingscreen] = useState(true);
   const [sidebar, setSidebar] = useState(false);
   const [completedTasks, setCompletedtasks] = useState([]);
   const [taskToConfirm, setTaskToConfirm] = useState(null);
@@ -134,6 +136,12 @@ const App = () => {
     }
   }, [dark]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingscreen(false);
+    }, 2500);
+  }, []);
+
   const mode = () => {
     setDark((prevtheme) => {
       const newState = !prevtheme;
@@ -167,7 +175,7 @@ const App = () => {
     setLoading(false);
   };
 
-  return (
+  return loadingScreen ? <Loading /> : (
     <main className="overflow-hidden relative bg-primary w-full sm:hidden">
       {/* -- UI */}
       <div className="flex flex-row items-center justify-between px-5 py-3">
