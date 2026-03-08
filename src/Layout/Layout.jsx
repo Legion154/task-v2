@@ -136,10 +136,10 @@ const Layout = ({ children }) => {
             onClick={openSidebar}
             className="cursor-pointer select-none"
           >
-            <i className="fa-solid fa-bars-staggered text-xl text-secondary"></i>
+            <i className="fa-solid fa-bars-staggered text-2xl text-secondary"></i>
           </button>
           <button type="button" onClick={openHistory}>
-            <i className="fa-solid fa-clock-rotate-left text-xl text-secondary"></i>
+            <i className="fa-solid fa-clock-rotate-left text-2xl text-secondary"></i>
           </button>
         </div>
       </div>
