@@ -143,7 +143,7 @@ const MainPurposes = () => {
   }, [dark]);
 
   return (
-    <main className="px-7 py-5 rounded-md flex flex-col items-center gap-5 mt-28 w-full h-screen">
+    <main className="px-3.5 py-5 rounded-md flex flex-col items-center gap-5 mt-28 w-full h-screen">
       <form
         onSubmit={addTask}
         className="flex flex-row items-center gap-4 bg-input rounded-md px-5 py-5 w-full sm:w-auto"

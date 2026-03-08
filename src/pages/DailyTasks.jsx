@@ -142,10 +142,10 @@ const DailyTasks = () => {
   };
 
   return (
-    <main className="px-7 py-5 rounded-md flex flex-col items-center gap-5 mt-28 w-full h-screen">
+    <main className="px-3.5 py-5 rounded-md flex flex-col items-center gap-5 mt-28 w-full h-screen">
       <form
         onSubmit={addTask}
-        className="flex flex-row items-center gap-4 bg-input rounded-md px-5 py-5 w-full sm:w-auto"
+        className="flex flex-row items-center gap-2 bg-input rounded-md px-5 py-5 w-full sm:w-auto"
       >
         <input
           id="deadline"
@@ -153,7 +153,7 @@ const DailyTasks = () => {
           onChange={inputVal}
           placeholder={langX.placeholder}
           type="text"
-          className="bg-transparent focus:outline-none rounded-md px-3 py-0.5 border border-slate-300 text-secondary w-full"
+          className="bg-transparent focus:outline-none rounded-md px-3 py-1 border border-slate-300 text-secondary w-full"
           onFocus={() => setTaskfocus(true)}
           onBlur={() => setTaskfocus(false)}
         />
