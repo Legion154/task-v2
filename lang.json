@@ -16,7 +16,7 @@
     "version": "improved version",
     "history": "History",
     "dailytasks": "Daily tasks",
-    "purposes": "Purposed tasks",
+    "purposes": "Main Goals",
     "mode": "Mode"
   },
   "ru": {
@@ -36,7 +36,7 @@
     "version": "улучшенная версия",
     "history": "История",
     "dailytasks": "Ежедневные задания",
-    "purposes": "Целевые задачи",
+    "purposes": "Основные цели",
     "mode": "Режим"
   },
   "uz": {
@@ -56,7 +56,7 @@
     "version": "takomillashtirilgan",
     "history": "Bajarilgan vazifalar",
     "dailytasks": "Kundalik vazifalar",
-    "purposes": "Maqsad qilingan vazifalar",
+    "purposes": "Asosiy maqsadlar",
     "mode": "Rejim"
   }
 }

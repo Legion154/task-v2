@@ -1,4 +1,13 @@
 1. Purposed tasks must be finish
-2. Translate every words
+2. Translate every words✅
 3. Do shorter untill you can
 5. Try to prevent all issues (most important)
+
+------------------------------------------------------------------
+
+1. Fixed a scroll of tasks
+2. Sign for showing next tasks are exist
+3. True history seperation
+4. Fix an admission of compliting tasks
+5. Alternative localization change
+6. Changed UI
