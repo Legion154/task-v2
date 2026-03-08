@@ -248,7 +248,7 @@ const DailyTasks = () => {
               <h1 className="px-3 py-0.5 text-secondary">{task}</h1>
               <button
                 onClick={() => deleteTask(id)}
-                className="py-1 px-2 bg-red-500 text-secondary font-bold rounded-md hover:bg-red-600 select-none duration-200"
+                className={`${dark ? "text-[#181d19]" : "text-[#f4f4f4]"} py-1 px-2 bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200`}
               >
                 {langX.remove}
               </button>
