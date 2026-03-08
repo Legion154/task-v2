@@ -188,7 +188,7 @@ const MainPurposes = () => {
       <ul
         ref={listRef}
         onScroll={taskRangeCondition}
-        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll h-[58vh]"
+        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll h-[56vh]"
       >
         {mainGoals.map(({ id, task, deadline }) => (
           <li

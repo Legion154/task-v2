@@ -187,7 +187,7 @@ const DailyTasks = () => {
       <ul
         ref={listRef}
         onScroll={taskRangeCondition}
-        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll h-[58vh]"
+        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll h-[56vh]"
       >
         {dailyTasks.map(({ id, task, deadline }) => (
           <li
