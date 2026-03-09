@@ -8,8 +8,8 @@ const GlobalProvider = ({ children }) => {
   const [dailyTasks, setDailyTasks] = useState([]);
   const [completedDailyTasks, setCompletedDailyTasks] = useState([]);
   // Second path
-  const [completedMainGoals, setCompletedMainGoals] = useState([]);
   const [mainGoals, setMainGoals] = useState([]);
+  const [completedMainGoals, setCompletedMainGoals] = useState([]);
   // Others
   const [loading, setLoading] = useState(false);
   const [dailyTasksHistory, setDailyTasksHistory] = useState(false);

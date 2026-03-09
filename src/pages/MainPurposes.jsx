@@ -41,27 +41,28 @@ const MainPurposes = () => {
   };
 
   useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("mainGoals"));
-    if (savedTasks) {
-      setMainGoals(savedTasks);
-    }
-    const savedmainGoals = JSON.parse(localStorage.getItem("mainGoals"));
-    if (savedmainGoals) {
-      setMainGoals(savedmainGoals);
+    const saved = JSON.parse(localStorage.getItem("mainGoals"));
+
+    if (saved) {
+      setMainGoals(saved);
     }
   }, []);
 
   useEffect(() => {
-    if (mainGoals.length > 0) {
-      localStorage.setItem("mainGoals", JSON.stringify(mainGoals));
+    if (dark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
     }
+  }, [dark]);
+
+  useEffect(() => {
+    localStorage.setItem("mainGoals", JSON.stringify(mainGoals));
   }, [mainGoals]);
 
   useEffect(() => {
-    if (mainGoals.length > 0) {
-      localStorage.setItem("mainGoals", JSON.stringify(mainGoals));
-    }
-  }, [mainGoals]);
+    localStorage.setItem("lang", lang);
+  }, [lang]);
 
   const inputVal = (e) => {
     setTask(e.target.value);
@@ -91,17 +92,6 @@ const MainPurposes = () => {
     }
   };
 
-  const deleteTask = (id) => {
-    const taskToDelete = mainGoals.find((task) => task.id === id);
-
-    if (taskToDelete) {
-      const updatedmainGoals = mainGoals.filter((task) => task.id !== id);
-
-      setMainGoals(updatedmainGoals);
-      localStorage.setItem("mainGoals", JSON.stringify(updatedmainGoals));
-    }
-  };
-
   const confirmDelete = () => {
     if (!taskToConfirm) return;
 
@@ -120,6 +110,39 @@ const MainPurposes = () => {
     setLoading(false);
   };
 
+  const deleteTask = (id) => {
+    const taskToDelete = completedMainGoals.find((task) => task.id === id);
+
+    if (taskToDelete) {
+      const updatedCompletedMainGoals = completedMainGoals.filter(
+        (task) => task.id !== id,
+      );
+
+      setCompletedMainGoals(updatedCompletedMainGoals);
+      localStorage.setItem(
+        "completedMainGoals",
+        JSON.stringify(updatedCompletedMainGoals),
+      );
+    }
+  };
+
+  const resetTask = (id) => {
+    const taskToReset = completedMainGoals.find((task) => task.id === id);
+
+    if (taskToReset) {
+      setMainGoals((prev) => [...prev, taskToReset]);
+
+      const updatedHistory = completedMainGoals.filter(
+        (task) => task.id !== id,
+      );
+      setCompletedMainGoals(updatedHistory);
+      localStorage.setItem(
+        "completedMainGoals",
+        JSON.stringify(updatedHistory),
+      );
+    }
+  };
+
   const taskRangeCondition = () => {
     const el = listRef.current;
 
@@ -133,14 +156,6 @@ const MainPurposes = () => {
   const closeHistoy = () => {
     setMainGoalsHistory(false);
   };
-
-  useEffect(() => {
-    if (dark) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [dark]);
 
   return (
     <main className="px-3.5 py-5 rounded-md flex flex-col items-center gap-5 mt-28 w-full h-screen">
@@ -220,7 +235,7 @@ const MainPurposes = () => {
       <div
         className={`${
           mainGoalsHistory ? "translate-x-0" : "translate-x-[800px]"
-        } fixed z-50 top-0 right-0 px-5 py-3 pb-2 w-screen h-screen bg-primary flex flex-col gap-5 overflow-hidden duration-500 sm:hidden`}
+        } fixed z-50 top-0 right-0 px-3 py-3 pb-2 w-screen h-screen bg-primary flex flex-col gap-5 overflow-hidden duration-500 sm:hidden`}
       >
         {/* INTRO */}
 
@@ -240,19 +255,30 @@ const MainPurposes = () => {
 
         {/* FINISHED TASKS */}
 
-        <div className="flex flex-col gap-4 overflow-y-scroll overflow-x-hidden">
+        <div className="flex flex-col gap-4 overflow-y-auto overflow-x-hidden">
           {completedMainGoals.map(({ id, task }) => (
             <div
               key={`completed_${id}`}
-              className="flex flex-row items-center justify-between gap-4 bg-input rounded-md px-5 py-5"
+              className="flex flex-row items-center justify-between gap-4 bg-input rounded-md px-4 py-5"
             >
-              <h1 className="px-3 py-0.5 text-secondary">{task}</h1>
-              <button
-                onClick={() => deleteTask(id)}
-                className={`${dark ? "text-[#181d19]" : "text-[#f4f4f4]"} py-1 px-2 bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200`}
-              >
-                {langX.remove}
-              </button>
+              <h1 className="py-0.5 text-secondary">{task}</h1>
+              <aside className="flex flex-row items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => resetTask(id)}
+                  className="py-1 px-2 text-white bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200"
+                >
+                  <i className="fa-solid fa-rotate text-sm"></i>
+                </button>
+                {/*  */}
+                <button
+                  type="button"
+                  onClick={() => deleteTask(id)}
+                  className="py-1 px-2 text-white bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200"
+                >
+                  {langX.remove}
+                </button>
+              </aside>
             </div>
           ))}
         </div>

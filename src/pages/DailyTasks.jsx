@@ -40,20 +40,20 @@ const DailyTasks = () => {
   };
 
   useEffect(() => {
-    if (dark) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [dark]);
-
-  useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("dailyTasks"));
 
     if (saved) {
       setDailyTasks(saved);
     }
   }, []);
+
+  useEffect(() => {
+    if (dark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [dark]);
 
   useEffect(() => {
     localStorage.setItem("dailyTasks", JSON.stringify(dailyTasks));
@@ -269,7 +269,7 @@ const DailyTasks = () => {
                   onClick={() => resetTask(id)}
                   className="py-1 px-2 text-white bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200"
                 >
-                  <i class="fa-solid fa-rotate text-sm"></i>
+                  <i className="fa-solid fa-rotate text-sm"></i>
                 </button>
                 {/*  */}
                 <button

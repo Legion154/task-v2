@@ -42,11 +42,19 @@ const Layout = ({ children }) => {
     if (savedTasks) {
       setTasks(savedTasks);
     }
+    // Completed Daily Tasks
     const savedCompletedDailyTasks = JSON.parse(
       localStorage.getItem("completedDailyTasks"),
     );
     if (savedCompletedDailyTasks) {
       setCompletedDailyTasks(savedCompletedDailyTasks);
+    }
+    // Completed Main Goals
+    const savedCompletedMainGoals = JSON.parse(
+      localStorage.getItem("completedMainGoals"),
+    );
+    if (savedCompletedMainGoals) {
+      setCompletedMainGoals(savedCompletedMainGoals);
     }
   }, []);
 
@@ -63,7 +71,13 @@ const Layout = ({ children }) => {
         JSON.stringify(completedDailyTasks),
       );
     }
-  }, [completedDailyTasks]);
+    if (completedMainGoals.length > 0) {
+      localStorage.setItem(
+        "completedMainGoals",
+        JSON.stringify(completedMainGoals),
+      );
+    }
+  }, [completedDailyTasks, completedMainGoals]);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
@@ -117,6 +131,7 @@ const Layout = ({ children }) => {
   };
 
   const closeAll = () => {
+    setLoading(false);
     setSidebar(false);
     location === "/" ? setDailyTasksHistory(false) : setMainGoalsHistory(false);
   };
