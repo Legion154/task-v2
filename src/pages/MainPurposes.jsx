@@ -169,7 +169,7 @@ const MainPurposes = () => {
           onChange={inputVal}
           placeholder={langX.placeholder}
           type="text"
-          className="bg-transparent focus:outline-none rounded-md px-3 py-0.5 border border-slate-300 text-secondary w-full"
+          className="bg-transparent focus:outline-none rounded-md px-3 py-1 border border-slate-300 text-secondary w-full"
           onFocus={() => setTaskfocus(true)}
           onBlur={() => setTaskfocus(false)}
         />
