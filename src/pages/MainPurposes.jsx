@@ -262,7 +262,7 @@ const MainPurposes = () => {
       <div
         className={`${
           loading ? "opacity-100 visible" : "opacity-0 invisible"
-        } absolute top-60 z-10 select-none duration-300`}
+        } absolute top-80 z-10 select-none duration-300`}
       >
         <span
           className={`${

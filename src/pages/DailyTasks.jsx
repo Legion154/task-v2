@@ -127,6 +127,23 @@ const DailyTasks = () => {
     }
   };
 
+  const resetTask = (id) => {
+    const taskToReset = completedDailyTasks.find((task) => task.id === id);
+
+    if (taskToReset) {
+      setDailyTasks((prev) => [...prev, taskToReset]);
+
+      const updatedHistory = completedDailyTasks.filter(
+        (task) => task.id !== id,
+      );
+      setCompletedDailyTasks(updatedHistory);
+      localStorage.setItem(
+        "completedDailyTasks",
+        JSON.stringify(updatedHistory),
+      );
+    }
+  };
+
   const taskRangeCondition = () => {
     const el = listRef.current;
 
@@ -187,7 +204,7 @@ const DailyTasks = () => {
       <ul
         ref={listRef}
         onScroll={taskRangeCondition}
-        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll h-[56vh]"
+        className="flex flex-col gap-3 w-full mt-4 overflow-y-scroll overflow-x-hidden h-[56vh]"
       >
         {dailyTasks.map(({ id, task, deadline }) => (
           <li
@@ -219,7 +236,7 @@ const DailyTasks = () => {
       <div
         className={`${
           dailyTasksHistory ? "translate-x-0" : "translate-x-[800px]"
-        } fixed z-50 top-0 right-0 px-5 py-3 pb-2 w-screen h-screen bg-primary flex flex-col gap-5 overflow-hidden duration-500 sm:hidden`}
+        } fixed z-50 top-0 right-0 px-3 py-3 pb-2 w-screen h-screen bg-primary flex flex-col gap-5 overflow-hidden duration-500 sm:hidden`}
       >
         {/* INTRO */}
 
@@ -239,19 +256,30 @@ const DailyTasks = () => {
 
         {/* FINISHED TASKS */}
 
-        <div className="flex flex-col gap-4 overflow-y-scroll overflow-x-hidden">
+        <div className="flex flex-col gap-4 overflow-y-auto overflow-x-hidden">
           {completedDailyTasks.map(({ id, task }) => (
             <div
               key={`completed_${id}`}
-              className="flex flex-row items-center justify-between gap-4 bg-input rounded-md px-5 py-5"
+              className="flex flex-row items-center justify-between gap-4 bg-input rounded-md px-4 py-5"
             >
-              <h1 className="px-3 py-0.5 text-secondary">{task}</h1>
-              <button
-                onClick={() => deleteTask(id)}
-                className={`${dark ? "text-[#181d19]" : "text-[#f4f4f4]"} py-1 px-2 bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200`}
-              >
-                {langX.remove}
-              </button>
+              <h1 className="py-0.5 text-secondary">{task}</h1>
+              <aside className="flex flex-row items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => resetTask(id)}
+                  className="py-1 px-2 text-white bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200"
+                >
+                  <i class="fa-solid fa-rotate text-sm"></i>
+                </button>
+                {/*  */}
+                <button
+                  type="button"
+                  onClick={() => deleteTask(id)}
+                  className="py-1 px-2 text-white bg-red-500 font-bold rounded-md hover:bg-red-600 select-none duration-200"
+                >
+                  {langX.remove}
+                </button>
+              </aside>
             </div>
           ))}
         </div>
@@ -261,7 +289,7 @@ const DailyTasks = () => {
       <div
         className={`${
           loading ? "opacity-100 visible" : "opacity-0 invisible"
-        } absolute top-60 z-10 select-none duration-300`}
+        } absolute top-80 z-10 select-none duration-300`}
       >
         <span
           className={`${
