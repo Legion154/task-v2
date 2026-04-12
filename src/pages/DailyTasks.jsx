@@ -4,6 +4,7 @@ import uz from "../assets/uz.png";
 import ru from "../assets/ru.png";
 import en from "../assets/en.png";
 import { GlobalContext } from "../../GlobalProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DailyTasks = () => {
   const defaultDateInp = new Date().toISOString().split("T")[0];
@@ -32,6 +33,7 @@ const DailyTasks = () => {
   );
   const [clientMaxed, setClientMaxed] = useState(false);
   const listRef = useRef(null);
+  const navigate = useNavigate();
 
   const notify = () => toast(langX.error);
 
@@ -62,6 +64,19 @@ const DailyTasks = () => {
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);
+
+  useEffect(() => {
+    const handleBack = () => {
+      setDailyTasksHistory(false);
+      navigate("/");
+    };
+
+    window.addEventListener("popstate", handleBack);
+
+    return () => {
+      window.removeEventListener("popstate", handleBack);
+    };
+  }, []);
 
   const inputVal = (e) => {
     setTask(e.target.value);
@@ -168,7 +183,7 @@ const DailyTasks = () => {
           id="deadline"
           value={task}
           onChange={inputVal}
-          placeholder={langX.placeholder}
+          placeholder={langX.placeholderDT}
           type="text"
           className="bg-transparent focus:outline-none rounded-md px-3 py-1 border border-slate-300 text-secondary w-full"
           onFocus={() => setTaskfocus(true)}

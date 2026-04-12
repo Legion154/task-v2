@@ -5,6 +5,7 @@ import uz from "../assets/uz.png";
 import ru from "../assets/ru.png";
 import en from "../assets/en.png";
 import { GlobalContext } from "../../GlobalProvider";
+import { useNavigate } from "react-router-dom";
 
 const MainPurposes = () => {
   const defaultDateInp = new Date().toISOString().split("T")[0];
@@ -33,6 +34,7 @@ const MainPurposes = () => {
   );
   const [clientMaxed, setClientMaxed] = useState(false);
   const listRef = useRef(null);
+  const navigate = useNavigate()
 
   const notify = () => toast(langX.error);
 
@@ -63,6 +65,19 @@ const MainPurposes = () => {
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);
+
+  useEffect(() => {
+    const handleBack = () => {
+      setMainGoalsHistory(false);
+      navigate("/goals");
+    };
+
+    window.addEventListener("popstate", handleBack);
+
+    return () => {
+      window.removeEventListener("popstate", handleBack);
+    };
+  }, []);
 
   const inputVal = (e) => {
     setTask(e.target.value);
@@ -167,7 +182,7 @@ const MainPurposes = () => {
           id="deadline"
           value={task}
           onChange={inputVal}
-          placeholder={langX.placeholder}
+          placeholder={langX.placeholderMG}
           type="text"
           className="bg-transparent focus:outline-none rounded-md px-3 py-1 border border-slate-300 text-secondary w-full"
           onFocus={() => setTaskfocus(true)}
